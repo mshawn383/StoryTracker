@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import DialogDemo from './Dialog';
-
+interface Tasks {
+  todo: TaskType[];
+  inProgress: TaskType[];
+  done: TaskType[];
+}
+interface TaskType{
+id:number,
+name:string
+}
 export default function DashBoard() {
-  const [tasks, setTasks] = useState({
+
+
+  const [tasks] = useState<Tasks>({
     todo: [],
     inProgress: [],
     done: []
   });
-  const [openDialog,setOpenDialog]=useState<boolean>(false)
-  const handleDialog=()=>{
-    setOpenDialog(false)
-  }
+ 
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -19,7 +26,7 @@ export default function DashBoard() {
       </header>
       <div className="flex justify-center mt-24">
         <div className="grid grid-cols-3 gap-8 w-full max-w-6xl">
-          {['todo', 'inProgress', 'done'].map(column => (
+          {(['todo', 'inProgress', 'done'] as Array<keyof Tasks>).map(column => (
             <div key={column} className="p-4 bg-white rounded-lg shadow-md drop-area" data-column={column}>
               <h2 className="text-2xl font-bold mb-4 capitalize flex items-center justify-between">
                 {column.replace(/([A-Z])/g, ' $1')}
@@ -28,9 +35,10 @@ export default function DashBoard() {
                 )}
               </h2>
               <div className="space-y-4">
-                {tasks[column].map((task, index) => (
-                  <div key={index} className="p-4 bg-gray-200 rounded-lg shadow-sm">
-                    {task}
+                
+                {tasks[column].map((value) => (
+                  <div key={value.id} className="p-4 bg-gray-200 rounded-lg shadow-sm">
+                    {value.name}
                   </div>
                 ))}
               </div>
