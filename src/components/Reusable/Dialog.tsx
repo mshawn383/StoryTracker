@@ -47,7 +47,6 @@ export default function DialogDemo() {
             </Label>
             <Input
               id="name"
-              defaultValue="Pedro Duarte"
               className="col-span-3"
               value={name}
               onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setName(e.target.value)}
@@ -58,8 +57,7 @@ export default function DialogDemo() {
               Summary
             </Label>
             <Input
-              id="username"
-              defaultValue="@peduarte"
+              id="summary"
               className="col-span-3"
               value={summary}
               onChange={(e:React.ChangeEvent<HTMLInputElement>)=>setSummary(e.target.value)}

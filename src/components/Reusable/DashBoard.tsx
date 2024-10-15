@@ -11,7 +11,7 @@ interface Tasks {
 
 
 export default function DashBoard() {
-  const store=useSelector((state: { task: Tasks }) =>state)
+  const store=useSelector((state: { task: Tasks }) =>state.task)
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
@@ -29,7 +29,7 @@ export default function DashBoard() {
                 )}
               </h2>
               <div className="space-y-2 sm:space-y-4">
-  {store.task[column]?.map((value) => (
+  {store[column]?.map((value) => (
     <div
       key={value.id}
       className="p-4 sm:p-6 bg-white rounded-lg shadow-lg transform transition-transform hover:scale-105"
