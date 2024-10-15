@@ -1,5 +1,7 @@
-import { useState } from 'react';
+
 import DialogDemo from './Dialog';
+import { useSelector } from 'react-redux';
+import { TaskType } from '../../store/TaskSlice';
 
 interface Tasks {
   todo: TaskType[];
@@ -7,17 +9,9 @@ interface Tasks {
   done: TaskType[];
 }
 
-interface TaskType {
-  id: number;
-  name: string;
-}
 
 export default function DashBoard() {
-  const [tasks] = useState<Tasks>({
-    todo: [],
-    inProgress: [],
-    done: []
-  });
+  const store=useSelector((state: { task: Tasks }) =>state)
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-8">
@@ -35,12 +29,18 @@ export default function DashBoard() {
                 )}
               </h2>
               <div className="space-y-2 sm:space-y-4">
-                {tasks[column].map((value) => (
-                  <div key={value.id} className="p-2 sm:p-4 bg-gray-200 rounded-lg shadow-sm">
-                    {value.name}
-                  </div>
-                ))}
-              </div>
+  {store.task[column]?.map((value) => (
+    <div
+      key={value.id}
+      className="p-4 sm:p-6 bg-white rounded-lg shadow-lg transform transition-transform hover:scale-105"
+    >
+      <h1 className="text-xl font-semibold mb-2">{value.name}</h1>
+      <p className="text-gray-600 mb-4">{value.summary}</p>
+     
+    </div>
+  ))}
+</div>
+
             </div>
           ))}
         </div>
