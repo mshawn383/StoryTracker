@@ -26,13 +26,27 @@ export const TaskSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    addStory: (state,action: PayloadAction<TaskType>) => {
+    addTodoStory: (state,action: PayloadAction<TaskType>) => {
       state.todo.push({id:action.payload.id,name:action.payload.name,summary:action.payload.summary}) 
+    },
+    removeTodoStoryById:(state,action:PayloadAction<string>)=>{
+      console.log(action,"Action");
+      
+      const result=state.todo.filter(val=>val.id !== (action.payload as string) )
+      console.log(result,"Result");
+      
+    },
+    addInProgressStory: (state,action: PayloadAction<TaskType>) => {
+      const isIdPresent=state.inprogress.filter(value=>value.id === action.payload.id)
+      if(isIdPresent.length==0){
+        state.inprogress.push({id:action.payload.id,name:action.payload.name,summary:action.payload.summary}) 
+      }
+    
     },
   },
 })
 
-export const { addStory } = TaskSlice.actions
+export const { addTodoStory,addInProgressStory,removeTodoStoryById } = TaskSlice.actions
 
 
 export default TaskSlice.reducer

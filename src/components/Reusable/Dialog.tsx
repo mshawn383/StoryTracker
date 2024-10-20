@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import React, {  useState } from "react"
 import { useDispatch } from "react-redux"
-import { addStory } from "../../store/TaskSlice"
+import { addTodoStory } from "../../store/TaskSlice"
 
 
 export default function DialogDemo() {
@@ -23,7 +23,7 @@ export default function DialogDemo() {
 
   const handleStoryData=()=>{
     const id=crypto.randomUUID()
-    dispatch(addStory({id,name,summary}))
+    dispatch(addTodoStory({id,name,summary}))
     setOpenDialog(false)
     setName("")
     setSummary("")
